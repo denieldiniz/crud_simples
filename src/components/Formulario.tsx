@@ -2,7 +2,7 @@ import Pessoa from '@/core/Pessoa'
 import { useContext, useState } from 'react'
 import Botao from './Botao'
 import Entrada from './Entrada'
-import { VisibilidadeContext } from '@/pages/index'
+import { VisibilidadeContext } from '@/context/VisibilidadeContext'
 
 export interface FormularioProps {
     pessoa?: Pessoa //pessoa será obrigatorio
@@ -12,6 +12,9 @@ export interface FormularioProps {
 
 export default function Formulario(props: FormularioProps) {
     let { setVisivel } = useContext(VisibilidadeContext)
+    let { pessoaEscolhida } = useContext(VisibilidadeContext)
+    console.log(pessoaEscolhida)
+
     const id = props.pessoa?.id
     const [nome, setNome] = useState(props.pessoa?.nome ?? '')
     const [idade, setIdade] = useState(props.pessoa?.idade ?? 0)

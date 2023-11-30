@@ -1,20 +1,20 @@
 import { dados } from '@/backend/dados'
-import Pessoa from '@/core/Pessoa'
 import Titulo from '@/components/Titulo'
 import Listagem from '@/components/Listagem'
 import Formulario from '@/components/Formulario'
+import Pessoa from '@/core/Pessoa'
 import { createContext, useState } from 'react'
 
-export const VisibilidadeContext = createContext<any>({})
-// eslint-disable-next-line react-hooks/rules-of-hooks
-
+export const AppContext = createContext<any>(null) //cria o contexto
 export default function Home() {
-    const [visivel, setVisivel] = useState<'listagem' | 'formulario'>('listagem')
+    const [visivel, setVisivel] = useState<'listagem' | 'formulario'>('listagem') //cria o status para definir a tela
+    const [pessoaEscolhida, setPessoaEscolhida] = useState<Pessoa>() //cria o status para definir a pessoa selecionada
 
     return (
-        <VisibilidadeContext.Provider value={{ visivel, setVisivel }}>
-            <div
-                className={'flex items-center flex-col h-screen bg-gradient-to-r from-blue-900 to-gray-900 text-white'}>
+        <div className={'flex items-center flex-col h-screen bg-gradient-to-r from-blue-900 to-gray-900 text-white'}>
+            <AppContext.Provider value={{ visivel, setVisivel, pessoaEscolhida, setPessoaEscolhida }}>
+                {/* provê acesso de forma global aos status e respectivos métodos aos componentes declarados dentro do contexto */}
+
                 <Titulo>Cadastro de Pessoas</Titulo>
 
                 {visivel === 'listagem' ? (
@@ -22,13 +22,14 @@ export default function Home() {
                         <Listagem />
                     </div>
                 ) : (
-                    <Formulario
-                        pessoa={dados[0]}
-                        pessoaMudou={() => ''}
-                        // cancelado={setVisivel('listagem')}
-                    />
+                    <div>
+                        <Formulario
+                            pessoa={dados[0]}
+                            pessoaMudou={() => ''}
+                        />
+                    </div>
                 )}
-            </div>
-        </VisibilidadeContext.Provider>
+            </AppContext.Provider>
+        </div>
     )
 }

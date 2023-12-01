@@ -2,7 +2,6 @@ import Pessoa from '@/core/Pessoa'
 import { useContext, useState } from 'react'
 import Botao from './Botao'
 import Entrada from './Entrada'
-import { VisibilidadeContext } from '@/context/VisibilidadeContext'
 
 export interface FormularioProps {
     pessoa?: Pessoa //pessoa será obrigatorio

@@ -5,7 +5,6 @@ import { IconeEdicao, IconeLixo } from './Icones'
 import { useContext } from 'react'
 import { criarPessoa, editarPessoa, excluirPessoa } from '@/core/ManipularPessoas'
 import Pessoa from '@/core/Pessoa'
-import { VisibilidadeContext } from '@/context/VisibilidadeContext'
 
 function renderizarCabecalho() {
     return (
@@ -50,7 +49,6 @@ function renderizarLinhas() {
 }
 
 export default function Listagem() {
-    useContext(VisibilidadeContext)
     return (
         <>
             <div className='flex justify-end w-full mt-7'>

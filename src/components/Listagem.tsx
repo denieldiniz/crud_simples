@@ -3,8 +3,7 @@ import { dados } from '@/backend/dados'
 import Botao from './Botao'
 import { IconeEdicao, IconeLixo } from './Icones'
 import { useContext } from 'react'
-import { criarPessoa, editarPessoa, excluirPessoa } from '@/core/ManipularPessoas'
-import Pessoa from '@/core/Pessoa'
+import { AppContext } from '@/pages'
 
 function renderizarCabecalho() {
     return (
@@ -19,6 +18,7 @@ function renderizarCabecalho() {
 }
 
 function renderizarLinhas() {
+    let { pessoaEscolhida, editarPessoa, excluirPessoa } = useContext(AppContext)
     return dados.map((pessoa) => {
         return (
             <tr
@@ -49,6 +49,7 @@ function renderizarLinhas() {
 }
 
 export default function Listagem() {
+    const { criarPessoa } = useContext(AppContext)
     return (
         <>
             <div className='flex justify-end w-full mt-7'>

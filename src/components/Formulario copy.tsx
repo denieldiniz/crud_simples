@@ -1,19 +1,32 @@
 import Pessoa from '@/core/Pessoa'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import Botao from './Botao'
 import Entrada from './Entrada'
 import { AppContext } from '@/pages'
 
-export default function Formulario() {
+export interface FormularioProps {
+    pessoa?: Pessoa //pessoa será obrigatorio
+    pessoaMudou?: (pessoa: Pessoa) => void
+    cancelado?: () => void
+}
+
+export default function Formulario(props: FormularioProps) {
     let { setVisivel, pessoaEscolhida } = useContext(AppContext)
+    // let { pessoaEscolhida } = useContext(VisibilidadeContext)
+    // console.log(pessoaEscolhida)
+
+    const id = props.pessoa?.id
+    const [nome, setNome] = useState(props.pessoa?.nome ?? '')
+    const [idade, setIdade] = useState(props.pessoa?.idade ?? 0)
+    const [profissao, setProfissao] = useState(props.pessoa?.profissao ?? '')
 
     return (
         <div>
-            {pessoaEscolhida ? (
+            {id ? (
                 <Entrada
                     somenteLeitura
                     legenda='Código'
-                    valor={pessoaEscolhida.id}
+                    valor={id}
                     className='mb-5'
                 />
             ) : (
@@ -22,29 +35,33 @@ export default function Formulario() {
 
             <Entrada
                 legenda='Nome'
-                valor={pessoaEscolhida.nome}
+                valor={nome}
+                valorMudou={setNome}
                 className='mb-5'
             />
 
             <Entrada
                 legenda='Idade'
                 tipo='number'
-                valor={pessoaEscolhida.idade}
+                valor={idade}
+                valorMudou={setIdade}
                 className='mb-5'
             />
 
             <Entrada
                 legenda='Profissão'
-                valor={pessoaEscolhida.profissao}
+                valor={profissao}
+                valorMudou={setProfissao}
                 className='mb-5'
             />
 
             <div className='flex justify-end mt-7'>
                 <Botao
                     cor='green'
+                    // onClick={props.pessoa}  fazer esse !!!!!!!!!!!!!!!!!!!!!
                     // onClick={() => props.pessoaMudou?.(new Pessoa(id, nome, idade, profissao))}
                     className='mb-5 mr-2'>
-                    {pessoaEscolhida.id ? 'Salvar' : 'Adicionar'}
+                    {id ? 'Alterar' : 'Salvar'}
                 </Botao>
 
                 <Botao

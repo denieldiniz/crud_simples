@@ -1,9 +1,8 @@
-import { dados } from '@/backend/dados'
 import Titulo from '@/components/Titulo'
 import Listagem from '@/components/Listagem'
 import Formulario from '@/components/Formulario'
 import Pessoa from '@/core/Pessoa'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useState } from 'react'
 
 export const AppContext = createContext<any>({})
 
@@ -22,7 +21,7 @@ export default function Home() {
     }
 
     function salvarPessoa(pessoa: Pessoa) {
-        console.log('salvarPessoa')
+        console.log(`salvar ${pessoa.nome}`)
     }
 
     function excluirPessoa(pessoa: Pessoa) {

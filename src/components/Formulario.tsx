@@ -1,4 +1,3 @@
-import Pessoa from '@/core/Pessoa'
 import { useContext } from 'react'
 import Botao from './Botao'
 import Entrada from './Entrada'
@@ -23,6 +22,7 @@ export default function Formulario() {
             <Entrada
                 legenda='Nome'
                 valor={pessoaEscolhida.nome}
+                valorMudou={pessoaEscolhida.setNome}
                 className='mb-5'
             />
 
@@ -30,12 +30,14 @@ export default function Formulario() {
                 legenda='Idade'
                 tipo='number'
                 valor={pessoaEscolhida.idade}
+                valorMudou={pessoaEscolhida.setIdade}
                 className='mb-5'
             />
 
             <Entrada
                 legenda='Profissão'
                 valor={pessoaEscolhida.profissao}
+                valorMudou={pessoaEscolhida.setProfissao}
                 className='mb-5'
             />
 

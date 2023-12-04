@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { dados } from '@/backend/dados'
+import { useContext } from 'react'
 import Botao from './Botao'
 import { IconeEdicao, IconeLixo } from './Icones'
-import { useContext } from 'react'
+import { dados } from '@/backend/dados'
 import { AppContext } from '@/pages'
 
 function renderizarCabecalho() {
@@ -18,7 +18,7 @@ function renderizarCabecalho() {
 }
 
 function renderizarLinhas() {
-    let { pessoaEscolhida, editarPessoa, excluirPessoa } = useContext(AppContext)
+    let { editarPessoa, excluirPessoa } = useContext(AppContext)
     return dados.map((pessoa) => {
         return (
             <tr

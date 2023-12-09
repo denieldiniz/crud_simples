@@ -3,15 +3,16 @@ import Listagem from '@/components/Listagem'
 import Formulario from '@/components/Formulario'
 import Pessoa from '@/core/Pessoa'
 import { createContext, useState } from 'react'
+import { dados as pessoas } from '@/backend/dados'
 
 export const AppContext = createContext<any>({})
 
 export default function Home() {
     const [visivel, setVisivel] = useState<'listagem' | 'formulario'>('listagem')
-    const [pessoaEscolhida, setPessoaEscolhida] = useState<Pessoa | {}>()
+    const [pessoaEscolhida, setPessoaEscolhida] = useState<Pessoa | { id: undefined }>()
 
-    function criarPessoa() {
-        setPessoaEscolhida({})
+    function criarPessoa(pessoa: Pessoa) {
+        setPessoaEscolhida({ id: undefined })
         setVisivel('formulario')
     }
 
@@ -21,10 +22,12 @@ export default function Home() {
     }
 
     function salvarPessoa(pessoa: Pessoa) {
-        console.log(`salvar ${pessoa.nome}`)
+        pessoaEscolhida?.id === undefined ? console.log('adicionar nova pessoa') : console.log(`salvar ${pessoa.nome}`)
+        // console.log(pessoaEscolhida.idade)
     }
 
     function excluirPessoa(pessoa: Pessoa) {
+        setPessoaEscolhida(pessoa)
         console.log(`excluir ${pessoa.nome}`)
     }
 
@@ -39,7 +42,8 @@ export default function Home() {
                     criarPessoa,
                     editarPessoa,
                     salvarPessoa,
-                    excluirPessoa
+                    excluirPessoa,
+                    pessoas
                 }}>
                 <Titulo>Cadastro de Pessoas</Titulo>
 

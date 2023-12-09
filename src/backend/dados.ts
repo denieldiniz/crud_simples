@@ -1,8 +1,8 @@
 import Pessoa from '@/core/Pessoa'
 
 export const dados = [
-    new Pessoa(1, 'Zizi', 14, 'Cheff'),
-    new Pessoa(2, 'Isa', 38, 'Marqueteira'),
-    new Pessoa(3, 'Deniel', 43, 'Programador'),
-    new Pessoa(4, 'Nenêm', 1, 'Sorrir')
+    new Pessoa('Zizi', 14, 'Cheff', 1),
+    new Pessoa('Isa', 38, 'Marqueteira', 2),
+    new Pessoa('Deniel', 43, 'Programador', 3),
+    new Pessoa('Nenêm', 1, 'Sorrir', 4)
 ]

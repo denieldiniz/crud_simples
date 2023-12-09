@@ -2,8 +2,8 @@
 import { useContext } from 'react'
 import Botao from './Botao'
 import { IconeEdicao, IconeLixo } from './Icones'
-import { dados } from '@/backend/dados'
 import { AppContext } from '@/pages'
+import Pessoa from '@/core/Pessoa'
 
 function renderizarCabecalho() {
     return (
@@ -18,34 +18,30 @@ function renderizarCabecalho() {
 }
 
 function renderizarLinhas() {
-    let { editarPessoa, excluirPessoa } = useContext(AppContext)
-    return dados.map((pessoa) => {
-        return (
-            <tr
-                key={pessoa.id}
-                className={`${pessoa.id % 2 === 0 ? 'bg-sky-300/100' : 'bg-sky-200'}`}>
-                <td className='text-center p-4'>{pessoa.id}</td>
-                <td className='text-center p-4'>{pessoa.nome}</td>
-                <td className='text-center p-4'>{pessoa.idade}</td>
-                <td className='text-center p-4'>{pessoa.profissao}</td>
-                <td className='flex justify-center p-4'>
-                    <Botao
-                        cor='gray'
-                        className='  text-green-400 flex justify-center items-center rounded-full p-2 m-1 hover:bg-purple-50'
-                        onClick={() => editarPessoa(pessoa)}>
-                        {IconeEdicao}
-                    </Botao>
+    let { pessoas, editarPessoa, excluirPessoa } = useContext(AppContext)
+    return pessoas.map((pessoa: Pessoa) => (
+        <tr
+            key={pessoa.id}
+            className={`${pessoa.id % 2 === 0 ? 'bg-sky-300/100' : 'bg-sky-200'}`}>
+            <td className='text-center p-4'>{pessoa.id}</td>
+            <td className='text-center p-4'>{pessoa.nome}</td>
+            <td className='text-center p-4'>{pessoa.idade}</td>
+            <td className='text-center p-4'>{pessoa.profissao}</td>
+            <td className='flex justify-center p-4'>
+                <button
+                    className='text-green-600 flex justify-center items-center rounded-full p-2 m-1 hover:bg-blue-100'
+                    onClick={() => editarPessoa(pessoa)}>
+                    {IconeEdicao}
+                </button>
 
-                    <Botao
-                        cor='gray'
-                        className=' text-red-400 flex justify-center items-center rounded-full p-2 m-1 hover:bg-purple-50'
-                        onClick={() => excluirPessoa(pessoa)}>
-                        {IconeLixo}
-                    </Botao>
-                </td>
-            </tr>
-        )
-    })
+                <button
+                    className=' text-red-600 flex justify-center items-center rounded-full p-2 m-1 hover:bg-blue-100'
+                    onClick={() => excluirPessoa(pessoa)}>
+                    {IconeLixo}
+                </button>
+            </td>
+        </tr>
+    ))
 }
 
 export default function Listagem() {
@@ -55,7 +51,7 @@ export default function Listagem() {
             <div className='flex justify-end w-full mt-7'>
                 <Botao
                     cor='green'
-                    className='flex mr-2 justify-center items-center text-white-500 rounded-full p-2 m-1  hover:bg-purple-50'
+                    className='flex mr-2 justify-center items-center p-2 m-1  hover:bg-purple-50'
                     onClick={() => criarPessoa()}>
                     Novo Usuário
                 </Botao>

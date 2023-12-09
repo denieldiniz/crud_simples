@@ -4,20 +4,16 @@ export default class Pessoa {
     #idade: number
     #profissao: string
 
-    constructor(id: any, nome: string, idade: number, profissao: string) {
-        this.#id = id
+    constructor(nome: string, idade: number, profissao: string, id: any) {
         this.#nome = nome
         this.#idade = idade
         this.#profissao = profissao
+        this.#id = id
     }
 
     // static vazio() {
-    //     return new Pessoa(0, '', 0, '')
+    //     return new Pessoa('', 0, '')
     // }
-
-    get id() {
-        return this.#id
-    }
 
     get nome() {
         return this.#nome
@@ -29,5 +25,21 @@ export default class Pessoa {
 
     get profissao() {
         return this.#profissao
+    }
+
+    get id() {
+        return this.#id
+    }
+
+    set nome(nome: string) {
+        this.#nome = nome
+    }
+
+    set idade(idade: number) {
+        this.#idade = idade
+    }
+
+    set profissao(profissao: string) {
+        this.#profissao = profissao
     }
 }

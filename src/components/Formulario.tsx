@@ -1,9 +1,13 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import Botao from './Botao'
 import { AppContext } from '@/pages'
 
 export default function Formulario() {
-    let { setVisivel, pessoaEscolhida, salvarPessoa } = useContext(AppContext)
+    let { setVisivel, pessoaEscolhida, salvarPessoa, criarNovaPessoa, pessoas } = useContext(AppContext)
+    const [nome, setNome] = useState(pessoaEscolhida.nome)
+    const [idade, setIdade] = useState(pessoaEscolhida.idade)
+    const [profissao, setProfissao] = useState(pessoaEscolhida.profissao)
+    const [id, setId] = useState(pessoaEscolhida.id)
 
     return (
         <div>
@@ -11,8 +15,8 @@ export default function Formulario() {
                 <div className='flex flex-col'>
                     <label className='mb-1'>Matrícula</label>
                     <input
-                        type='number'
-                        value={pessoaEscolhida.id}
+                        type='text'
+                        defaultValue={pessoaEscolhida.id}
                         className='text-slate-700 border border-blue-500 rounded-lg focus:outline-none bg-slate-400 mb-5 px-4 py-2 '
                     />
                 </div>
@@ -24,9 +28,9 @@ export default function Formulario() {
                 <label className='mb-1'>Nome</label>
                 <input
                     type='text'
-                    value={pessoaEscolhida.nome}
+                    defaultValue={nome}
                     className=' text-black border border-blue-500 rounded-lg focus:outline-none bg-gray-100 mb-5 px-4 py-2'
-                    // onChange={(e) => (pessoaEscolhida.nome = e.target.value)}
+                    onChange={(e) => setNome(e.target.value)}
                 />
             </div>
 
@@ -34,10 +38,12 @@ export default function Formulario() {
                 <label className='mb-1'>Idade</label>
                 <input
                     type='text'
-                    value={pessoaEscolhida.idade}
+                    defaultValue={idade}
                     className=' text-black border border-blue-500 rounded-lg focus:outline-none bg-gray-100 mb-5 px-4 py-2'
-                    onChange={(e) => (pessoaEscolhida.idade = e.target.value)}
+                    onChange={(e) => setIdade(e.target.value)}
                     // onChange={(e) => (pessoaEscolhida.idade = e.target.value)}
+                    // onChange={(e) => console.log(e.target.value)}
+                    // onChange={(e) => console.log(pessoaEscolhida.idade)}
                 />
             </div>
 
@@ -45,16 +51,21 @@ export default function Formulario() {
                 <label className='mb-1'>Profissão</label>
                 <input
                     type='text'
-                    value={pessoaEscolhida.profissao}
+                    defaultValue={profissao}
                     className=' text-black border border-blue-500 rounded-lg focus:outline-none bg-gray-100 mb-5 px-4 py-2'
-                    // onChange={(e) => (pessoaEscolhida.profissao = e.target.value)}
+                    onChange={(e) => setProfissao(e.target.value)}
                 />
             </div>
 
             <div className='flex justify-end mt-7'>
                 <Botao
                     cor='blue'
-                    onClick={() => salvarPessoa(pessoaEscolhida)}
+                    onClick={
+                        pessoaEscolhida.id
+                            ? () => salvarPessoa({ nome, idade, profissao, id })
+                            : () => criarNovaPessoa({ nome, idade, profissao, id })
+                    }
+                    // onClick={() => salvarPessoa({ nome, idade, profissao, id })}
                     className='mb-5 mr-2'>
                     {pessoaEscolhida.id ? 'Salvar' : 'Adicionar'}
                 </Botao>

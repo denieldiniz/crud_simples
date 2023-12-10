@@ -42,4 +42,7 @@ export default class Pessoa {
     set profissao(profissao: string) {
         this.#profissao = profissao
     }
+    set id(id: number) {
+        this.#id = id
+    }
 }

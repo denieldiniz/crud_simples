@@ -16,14 +16,36 @@ export default function Home() {
         setVisivel('formulario')
     }
 
+    function criarNovaPessoa(pessoa: Pessoa) {
+        // console.log(pessoas.length + 1)
+        pessoa.id = pessoas.length + 1
+        pessoaEscolhida.id = pessoa.id
+        pessoaEscolhida.nome = pessoa.nome
+        pessoaEscolhida.idade = pessoa.idade
+        pessoaEscolhida.profissao = pessoa.profissao
+        setVisivel('listagem')
+
+        // console.log(pessoa)
+        // console.log(pessoaEscolhida)
+
+        pessoas.push(pessoa)
+    }
+
     function editarPessoa(pessoa: Pessoa) {
         setPessoaEscolhida(pessoa)
         setVisivel('formulario')
     }
 
     function salvarPessoa(pessoa: Pessoa) {
-        pessoaEscolhida?.id === undefined ? console.log('adicionar nova pessoa') : console.log(`salvar ${pessoa.nome}`)
-        // console.log(pessoaEscolhida.idade)
+        pessoaEscolhida.id = pessoa.id
+        pessoaEscolhida.nome = pessoa.nome
+        pessoaEscolhida.idade = pessoa.idade
+        pessoaEscolhida.profissao = pessoa.profissao
+        pessoas[pessoaEscolhida.id - 1] = pessoa
+        // : pessoas.filter((pessoa) => pessoa.id === pessoaEscolhida.id)
+        // pessoaEscolhida?.id === undefined ? console.log('adicionar nova pessoa') : console.log(`salvar ${pessoa.nome}`)
+
+        setVisivel('listagem')
     }
 
     function excluirPessoa(pessoa: Pessoa) {
@@ -40,6 +62,7 @@ export default function Home() {
                     pessoaEscolhida,
                     setPessoaEscolhida,
                     criarPessoa,
+                    criarNovaPessoa,
                     editarPessoa,
                     salvarPessoa,
                     excluirPessoa,

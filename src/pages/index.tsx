@@ -9,6 +9,7 @@ export const AppContext = createContext<any>({})
 
 export default function Home() {
     const [visivel, setVisivel] = useState<'listagem' | 'formulario'>('listagem')
+    // const [pessoas, setPessoas] = useState<Pessoa[]>(dados)
     const [pessoaEscolhida, setPessoaEscolhida] = useState<Pessoa | { id: undefined }>()
 
     function criarPessoa(pessoa: Pessoa) {
@@ -17,18 +18,13 @@ export default function Home() {
     }
 
     function criarNovaPessoa(pessoa: Pessoa) {
-        // console.log(pessoas.length + 1)
         pessoa.id = pessoas.length + 1
         pessoaEscolhida.id = pessoa.id
         pessoaEscolhida.nome = pessoa.nome
         pessoaEscolhida.idade = pessoa.idade
         pessoaEscolhida.profissao = pessoa.profissao
-        setVisivel('listagem')
-
-        // console.log(pessoa)
-        // console.log(pessoaEscolhida)
-
         pessoas.push(pessoa)
+        setVisivel('listagem')
     }
 
     function editarPessoa(pessoa: Pessoa) {
@@ -42,15 +38,19 @@ export default function Home() {
         pessoaEscolhida.idade = pessoa.idade
         pessoaEscolhida.profissao = pessoa.profissao
         pessoas[pessoaEscolhida.id - 1] = pessoa
-        // : pessoas.filter((pessoa) => pessoa.id === pessoaEscolhida.id)
-        // pessoaEscolhida?.id === undefined ? console.log('adicionar nova pessoa') : console.log(`salvar ${pessoa.nome}`)
 
         setVisivel('listagem')
     }
 
     function excluirPessoa(pessoa: Pessoa) {
-        setPessoaEscolhida(pessoa)
-        console.log(`excluir ${pessoa.nome}`)
+        console.log(pessoas)
+
+        pessoas.splice(pessoa.id - 1, 1)
+
+        console.log(pessoa.nome + ' removido(a)')
+        console.log(pessoas)
+
+        setVisivel('listagem')
     }
 
     return (

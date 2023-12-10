@@ -41,9 +41,6 @@ export default function Formulario() {
                     defaultValue={idade}
                     className=' text-black border border-blue-500 rounded-lg focus:outline-none bg-gray-100 mb-5 px-4 py-2'
                     onChange={(e) => setIdade(e.target.value)}
-                    // onChange={(e) => (pessoaEscolhida.idade = e.target.value)}
-                    // onChange={(e) => console.log(e.target.value)}
-                    // onChange={(e) => console.log(pessoaEscolhida.idade)}
                 />
             </div>
 
@@ -65,7 +62,6 @@ export default function Formulario() {
                             ? () => salvarPessoa({ nome, idade, profissao, id })
                             : () => criarNovaPessoa({ nome, idade, profissao, id })
                     }
-                    // onClick={() => salvarPessoa({ nome, idade, profissao, id })}
                     className='mb-5 mr-2'>
                     {pessoaEscolhida.id ? 'Salvar' : 'Adicionar'}
                 </Botao>

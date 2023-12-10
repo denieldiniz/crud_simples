@@ -3,13 +3,14 @@ import Listagem from '@/components/Listagem'
 import Formulario from '@/components/Formulario'
 import Pessoa from '@/core/Pessoa'
 import { createContext, useState } from 'react'
-import { dados as pessoas } from '@/backend/dados'
+import { dados } from '@/backend/dados'
+// import { dados as pessoas } from '@/backend/dados'
 
 export const AppContext = createContext<any>({})
 
 export default function Home() {
     const [visivel, setVisivel] = useState<'listagem' | 'formulario'>('listagem')
-    // const [pessoas, setPessoas] = useState<Pessoa[]>(dados)
+    const [pessoas, setPessoas] = useState<Array>(dados)
     const [pessoaEscolhida, setPessoaEscolhida] = useState<Pessoa | { id: undefined }>()
 
     function criarPessoa(pessoa: Pessoa) {
@@ -49,8 +50,6 @@ export default function Home() {
 
         console.log(pessoa.nome + ' removido(a)')
         console.log(pessoas)
-
-        setVisivel('listagem')
     }
 
     return (

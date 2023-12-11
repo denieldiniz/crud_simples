@@ -44,12 +44,14 @@ export default function Home() {
     }
 
     function excluirPessoa(pessoa: Pessoa) {
+        const listaFiltrada = pessoas.filter((daVez: Pessoa) => (daVez !== pessoa ? pessoa : null))
+        setPessoas(listaFiltrada)
         console.log(pessoas)
 
-        pessoas.splice(pessoa.id - 1, 1)
-
-        console.log(pessoa.nome + ' removido(a)')
-        console.log(pessoas)
+        // console.log(pessoas)
+        // pessoas.splice(pessoa.id - 1, 1)
+        // console.log(pessoa.nome + ' removido(a)')
+        // console.log(pessoas)
     }
 
     return (
